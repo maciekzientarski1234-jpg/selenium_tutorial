@@ -1,12 +1,13 @@
 from selenium.webdriver import Chrome
 from time import sleep
 
-# stworzenie instalacji klasy Chrome
-# to otworzy przegladarke
+# Stworzenie instancji klasy Chrome
+# (to otworzy przeglądarkę)
 driver = Chrome()
-# otwarcie strony
-driver.get("https://www.kozminski.edu.pl/pl")
-# maksymalizacja okna
+# Otwarcie strony
+driver.get("https://automationpractice.techwithjatin.com/")
+
+# Maksymalizacja okna
 driver.maximize_window()
 sleep(5)
 driver.quit()

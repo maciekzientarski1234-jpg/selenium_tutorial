@@ -8,7 +8,7 @@ class TestCzlowiek(unittest.TestCase):
     # Zaczynają się od słowa test...
     def test_przedstaw_sie(self):
         przedsatwienie_str = self.czlowiek.przedstaw_sie()
-        self.assertEqual(przedsatwienie_str, "Cześć, jestem Stasio")
+        self.assertEqual("Cześć, jestem Stasio", przedsatwienie_str)
     def tearDown(self):
         del self.czlowiek
 if __name__ == "__main__":

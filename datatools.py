@@ -4,6 +4,6 @@ class Gender:
 
 class TestData:
     EMAIL = "marcin@marcin.com"
-    GENDER = Gender.MALE
+    GENDER = Gender.FEMALE
 
 print(f"ZAIMPORTOWANO {__name__}")

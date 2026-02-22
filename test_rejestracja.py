@@ -1,4 +1,6 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
 from time import sleep
 from datatools import TestData
@@ -26,12 +28,22 @@ class RegisterNewUserTest(unittest.TestCase):
         # 3. Kliknij "Create an account"
         self.driver.find_element(By.ID, "SubmitCreate").click()
         # 4. Kliknij swoją płeć
+        # Poczekam, aż będzie można kliknąć:
+        # Metoda 1: Implicit wait
+        # self.driver.implicitly_wait(10)
+        # Metoda 2: Explicit wait
+
+
         if TestData.GENDER == Gender.FEMALE:
             # Kliknij Mrs
-            self.driver.find_element(By.CSS_SELECTOR, 'label[for="id_gender2"]').click()
+            gender_female = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, 'label[for="id_gender2"]')))
+            gender_female.click()
         else:
             # Kliknij Mr
-            self.driver.find_element(By.XPATH, '//label[@for="id_gender1"]').click()
+            gender_male = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, '//label[@for="id_gender1"]')))
+            gender_male.click()
+
+        sleep(2)
 
     def tearDown(self):
         self.driver.quit()

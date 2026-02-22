@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.select import Select
 from selenium import webdriver
 from time import sleep
 from datatools import TestData
@@ -45,7 +46,18 @@ class RegisterNewUserTest(unittest.TestCase):
         # 6. Sprawdź poprawność e-maila
         email_input = self.driver.find_element(By.ID, "email")
         email_actual = email_input.get_attribute("value")
-        self.assertEqual(TestData.EMAIL, "")
+        self.assertEqual(TestData.EMAIL, email_actual)
+        # 7. Wpisz hasło
+        self.driver.find_element(By.ID, "passwd").send_keys(TestData.VALID_PASSWORD)
+        # 8. Wybierz datę urodzenia
+        days = Select(self.driver.find_element(By.ID, "days"))
+        days.select_by_value(TestData.BIRTH_DAY)
+        months = Select(self.driver.find_element(By.ID, "months"))
+        months.select_by_value(TestData.BIRTH_MONTH)
+        years = Select(self.driver.find_element(By.ID, "years"))
+        years.select_by_value(TestData.BIRTH_YEAR)
+        # 9. Kliknij Register
+        self.driver.find_element(By.ID, "submitAccount").click()
 
         sleep(2)
 

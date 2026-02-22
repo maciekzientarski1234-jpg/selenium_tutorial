@@ -17,28 +17,12 @@ DATA_GENDER = Gender.MALE
 # (to otworzy przeglądarkę)
 driver = Chrome()
 # Otwarcie strony
-driver.get("https://automationpractice.techwithjatin.com/")
+driver.get("https://www.kozminski.edu.pl/pl")
+driver.implicitly_wait(10)
+shadow_host = driver.find_element(By.ID, "usercentrics-root")
 
-# Maksymalizacja okna
-driver.maximize_window()
-# Znajdz element Sign in
-sign_in_a = driver.find_element(By.PARTIAL_LINK_TEXT, "Sign in")
-# Kliknij w odnaleziony element
-sign_in_a.click()
-
-# Wpisz email
-driver.find_element(By.ID, "email_create").send_keys(DATA_EMAIL)
-
-# Kliknij Create Account
-driver.find_element(By.ID, "SubmitCreate").click()
-
-driver.implicitly_wait(5)
-# Kliknij swoją płeć
-if DATA_GENDER == Gender.FEMALE:
-    driver.find_element(By.XPATH, '//label[@for="id_gender2"]').click()
-
-else:
-    driver.find_element(By.XPATH, '//label[@for="id_gender1"]').click()
-
-sleep(5)
-driver.quit()
+shadow_root = shadow_host.shadow_root
+print(type(shadow_root))
+btn = shadow_root.find_element(By.CSS_SELECTOR, 'button[data-testid="uc-accept-all-button"]')
+btn.click()
+sleep(4)

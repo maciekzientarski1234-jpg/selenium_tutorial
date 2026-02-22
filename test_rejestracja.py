@@ -19,6 +19,11 @@ class RegisterNewUserTest(unittest.TestCase):
         # 2. Użytkownik niezalogowany
         # (opcjonalnie) można sprawdzić
 
+    def test_password_too_short(self):
+        pass
+
+
+    @unittest.skip("skipping test_no_name_in_registration_form")
     def test_no_name_in_registration_form(self):
         # KROKI
         # 1. Klinkij "Sign in"

@@ -32,8 +32,6 @@ class RegisterNewUserTest(unittest.TestCase):
         # Metoda 1: Implicit wait
         # self.driver.implicitly_wait(10)
         # Metoda 2: Explicit wait
-
-
         if TestData.GENDER == Gender.FEMALE:
             # Kliknij Mrs
             gender_female = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, 'label[for="id_gender2"]')))
@@ -42,6 +40,12 @@ class RegisterNewUserTest(unittest.TestCase):
             # Kliknij Mr
             gender_male = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, '//label[@for="id_gender1"]')))
             gender_male.click()
+        # 5. Wpisz nazwisko
+        self.driver.find_element(By.ID, "customer_firstname").send_keys(TestData.LAST_NAME)
+        # 6. Sprawdź poprawność e-maila
+        email_input = self.driver.find_element(By.ID, "email")
+        email_actual = email_input.get_attribute("value")
+        self.assertEqual(TestData.EMAIL, "")
 
         sleep(2)
 
